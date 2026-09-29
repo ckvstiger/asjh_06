@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ 鄭文崎的超級無敵可愛個人網站 💖 | 安溪國中 ‧ 數位商管未來之星</title>
+    <meta name="description" content="我是鄭文崎，就讀安溪國中。熱愛商業經營、電子商務與智慧科技，在智光商工課程中努力學習打字指法與網頁開發，期許成為全方位的數位商管跨領域人才！">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=M+PLUS+Rounded+1c:wght@400;700;800&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti & Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #FF75A0;
+            --primary-light: #FFD3E2;
+            --secondary: #6C5CE7;
+            --secondary-light: #E0DBFF;
+            --accent: #FFB800;
+            --accent-light: #FFF0BA;
+            --mint: #00B894;
+            --mint-light: #D1F7EC;
+            --sky: #0984E3;
+            --sky-light: #E1F5FE;
+            --purple: #A29BFE;
+            
+            --bg-base: #FFF9FC;
+            --card-bg: rgba(255, 255, 255, 0.88);
+            --card-border: rgba(255, 117, 160, 0.25);
+            --text-main: #333350;
+            --text-muted: #71719A;
+            --shadow-pop: 0 12px 30px rgba(255, 117, 160, 0.18);
+            --shadow-hover: 0 20px 40px rgba(255, 117, 160, 0.3);
+            --radius-lg: 30px;
+            --radius-md: 20px;
+            --radius-sm: 12px;
+            --radius-pill: 999px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'M PLUS Rounded 1c', 'Noto Sans TC', sans-serif;
+            background: linear-gradient(135deg, #FFF0F5 0%, #F0F4FF 40%, #FFFCE6 70%, #F5EBFF 100%);
+            background-attachment: fixed;
+            color: var(--text-main);
+            line-height: 1.7;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating background elements */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Top Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1100px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius-pill);
+            padding: 10px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(255, 117, 160, 0.12);
+            transition: all 0.3s ease;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-logo i {
+            font-size: 1.5rem;
+            animation: pulse-heart 1.5s infinite;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.95rem;
+            padding: 6px 16px;
+            border-radius: var(--radius-pill);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-light);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-sound {
+            background: var(--primary-light);
+            color: var(--primary);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+
+        .btn-sound:hover {
+            transform: scale(1.15) rotate(15deg);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            padding-top: 130px;
+            padding-bottom: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-card {
+            background: var(--card-bg);
+            border: 3px solid white;
+            outline: 3px solid var(--primary-light);
+            border-radius: var(--radius-lg);
+            padding: 50px 40px;
+            box-shadow: var(--shadow-pop);
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 45px;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-card::before {
+            content: '✨ 🦄 🌸 💖 ⭐';
+            position: absolute;
+            top: -20px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.25;
+            letter-spacing: 12px;
+        }
+
+        /* Avatar Styling */
+        .avatar-wrapper {
+            position: relative;
+            text-align: center;
+        }
+
+        .avatar-frame {
+            width: 260px;
+            height: 260px;
+            margin: 0 auto;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(45deg, #FF75A0, #FFB800, #A29BFE, #00B894);
+            background-size: 300% 300%;
+            animation: rainbow-border 6s ease infinite;
+            box-shadow: 0 15px 35px rgba(255, 117, 160, 0.35);
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .avatar-frame:hover {
+            transform: scale(1.06) rotate(3deg);
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 5px solid white;
+            background-color: #fff;
+        }
+
+        .avatar-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 25px;
+            background: #FFF;
+            color: var(--primary);
+            font-weight: 800;
+            padding: 6px 16px;
+            border-radius: var(--radius-pill);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            font-size: 0.88rem;
+            border: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: float-badge 3s ease-in-out infinite;
+        }
+
+        .speech-bubble {
+            position: absolute;
+            top: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            color: var(--secondary);
+            font-weight: 800;
+            padding: 8px 18px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: 2px solid var(--secondary-light);
+            pointer-events: none;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: white transparent;
+        }
+
+        .avatar-wrapper:hover .speech-bubble,
+        .avatar-wrapper.active .speech-bubble {
+            opacity: 1;
+            visibility: visible;
+            top: -55px;
+        }
+
+        /* Hero Content */
+        .hero-content h2 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            line-height: 1.25;
+        }
+
+        .hero-content h1 span {
+            color: var(--primary);
+            background: linear-gradient(120deg, #FF75A0, #FFB800);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: white;
+            border: 2px solid var(--primary-light);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: var(--radius-pill);
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 4px 10px rgba(255, 117, 160, 0.08);
+            transition: transform 0.2s ease;
+        }
+
+        .tag:hover {
+            transform: translateY(-3px) scale(1.05);
+            background: var(--primary);
+            color: white;
+        }
+
+        .tag.tag-blue {
+            border-color: var(--secondary-light);
+            color: var(--secondary);
+        }
+
+        .tag.tag-blue:hover {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .tag.tag-mint {
+            border-color: var(--mint-light);
+            color: var(--mint);
+        }
+
+        .tag.tag-mint:hover {
+            background: var(--mint);
+            color: white;
+        }
+
+        .hero-bio {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 20px;
+            border-radius: var(--radius-md);
+            border-left: 5px solid var(--primary);
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: var(--radius-pill);
+            font-weight: 800;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), #FF92B4);
+            color: white;
+            box-shadow: 0 10px 25px rgba(255, 117, 160, 0.35);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(255, 117, 160, 0.5);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--secondary-light);
+        }
+
+        .btn-secondary:hover {
+            background: var(--secondary-light);
+            transform: translateY(-4px);
+        }
+
+        /* Section Title */
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-badge {
+            background: var(--primary-light);
+            color: var(--primary);
+            font-weight: 800;
+            font-size: 0.9rem;
+            padding: 6px 18px;
+            border-radius: var(--radius-pill);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: 2.3rem;
+            font-weight: 900;
+            color: var(--text-main);
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        /* About & Highlights Section */
+        .section-padding {
+            padding: 90px 0;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .cute-card {
+            background: var(--card-bg);
+            border: 2px solid white;
+            border-radius: var(--radius-md);
+            padding: 32px;
+            box-shadow: var(--shadow-pop);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cute-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .icon-pink { background: var(--primary-light); color: var(--primary); }
+        .icon-blue { background: var(--secondary-light); color: var(--secondary); }
+        .icon-yellow { background: var(--accent-light); color: var(--accent); }
+        .icon-mint { background: var(--mint-light); color: var(--mint); }
+
+        .cute-card h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text-main);
+        }
+
+        .cute-card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Interest Cards Section */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        @media (max-width: 992px) {
+            .interests-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 576px) {
+            .interests-grid { grid-template-columns: 1fr; }
+        }
+
+        .interest-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 28px 22px;
+            text-align: center;
+            border: 2px solid var(--primary-light);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.04);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .interest-card:hover {
+            transform: translateY(-10px) scale(1.03);
+            border-color: var(--primary);
+            box-shadow: 0 18px 35px rgba(255, 117, 160, 0.25);
+        }
+
+        .interest-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+
+        .interest-card:hover .interest-emoji {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .interest-card h4 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 10px;
+        }
+
+        .interest-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+
+        .interest-tag {
+            margin-top: 15px;
+            display: inline-block;
+            background: var(--primary-light);
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: var(--radius-pill);
+        }
+
+        /* Typing Mini Game Section */
+        .typing-section {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-pop);
+            border: 3px solid var(--secondary-light);
+            margin-top: 40px;
+        }
+
+        .typing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .typing-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-box {
+            background: var(--secondary-light);
+            color: var(--secondary);
+            padding: 8px 18px;
+            border-radius: var(--radius-pill);
+            font-weight: 800;
+            font-size: 0.95rem;
+        }
+
+        .typing-target-box {
+            background: #F8F9FE;
+            border: 2px dashed var(--secondary);
+            border-radius: var(--radius-md);
+            padding: 24px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .typing-target-box .char-correct { color: var(--mint); background: rgba(0, 184, 148, 0.15); border-radius: 4px; }
+        .typing-target-box .char-wrong { color: #D63031; background: rgba(214, 48, 49, 0.15); border-radius: 4px; }
+        .typing-target-box .char-current { border-bottom: 3px solid var(--primary); animation: blink 0.8s infinite; }
+
+        .typing-input {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 1.1rem;
+            border: 2px solid var(--primary-light);
+            border-radius: var(--radius-pill);
+            outline: none;
+            font-family: inherit;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .typing-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px var(--primary-light);
+        }
+
+        /* Vision & Timeline */
+        .vision-box {
+            background: linear-gradient(135deg, var(--secondary) 0%, #8E7CFF 100%);
+            color: white;
+            border-radius: var(--radius-lg);
+            padding: 45px;
+            box-shadow: 0 15px 35px rgba(108, 92, 231, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vision-box::before {
+            content: '🚀 🌟 💫';
+            position: absolute;
+            font-size: 4rem;
+            opacity: 0.1;
+            top: 10px;
+            left: 20px;
+        }
+
+        .vision-box h3 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .vision-box p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .vision-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .vision-steps { grid-template-columns: 1fr; }
+        }
+
+        .v-step {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            text-align: left;
+        }
+
+        .v-step-num {
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: var(--accent-light);
+            margin-bottom: 8px;
+        }
+
+        .v-step h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .v-step p {
+            font-size: 0.95rem;
+            margin: 0;
+            opacity: 0.85;
+        }
+
+        /* Message Board / Sticky Notes */
+        .guestbook-section {
+            margin-top: 50px;
+        }
+
+        .guestbook-form {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: 30px;
+            box-shadow: var(--shadow-pop);
+            margin-bottom: 35px;
+            border: 2px solid var(--primary-light);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 576px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 18px;
+            border-radius: var(--radius-sm);
+            border: 2px solid #EAEAEA;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .sticky-note {
+            padding: 22px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            position: relative;
+            transform: rotate(-1.5deg);
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .sticky-note:nth-child(even) {
+            transform: rotate(2deg);
+        }
+
+        .sticky-note:hover {
+            transform: scale(1.05) rotate(0deg);
+            z-index: 10;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.12);
+        }
+
+        .note-pink { background: #FFEFF4; border-top: 5px solid var(--primary); }
+        .note-yellow { background: #FFFBEA; border-top: 5px solid var(--accent); }
+        .note-blue { background: #EEF6FF; border-top: 5px solid var(--sky); }
+        .note-mint { background: #EAFAF5; border-top: 5px solid var(--mint); }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .note-time {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        /* Modal styling */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(44, 44, 64, 0.6);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            max-width: 550px;
+            width: 90%;
+            border: 3px solid var(--primary-light);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .btn-close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #F0F0F0;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-weight: 800;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .btn-close-modal:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: white;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 2px solid var(--primary-light);
+            margin-top: 80px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 700;
+        }
+
+        footer i {
+            color: var(--primary);
+        }
+
+        /* Keyframe Animations */
+        @keyframes rainbow-border {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse-heart {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+        }
+
+        @keyframes float-badge {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 868px) {
+            .hero-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 40px 20px;
+            }
+
+            .avatar-frame {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-tags, .hero-btns {
+                justify-content: center;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Floating Canvas Background -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="#" class="nav-logo">
+            <i class="fa-solid fa-heart"></i>
+            <span>鄭文崎的可愛空間</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="#about"><i class="fa-solid fa-user-sparkles"></i> 關於我</a></li>
+            <li><a href="#interests"><i class="fa-solid fa-star"></i> 興趣與專長</a></li>
+            <li><a href="#typing"><i class="fa-solid fa-keyboard"></i> 打字小考驗</a></li>
+            <li><a href="#vision"><i class="fa-solid fa-rocket"></i> 未來期許</a></li>
+            <li><a href="#guestbook"><i class="fa-solid fa-note-sticky"></i> 可愛留言牆</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="btn-sound" id="btnSoundToggle" title="切換可愛音效">
+                <i class="fa-solid fa-volume-high"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-card">
+                <div class="avatar-wrapper" id="avatarWrapper">
+                    <div class="speech-bubble" id="speechBubble">點我有驚喜唷！✨</div>
+                    <div class="avatar-frame">
+                        <img src="MyQ.jpg" alt="鄭文崎 Q版頭像" class="avatar-img" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=Wenqi'">
+                    </div>
+                    <div class="avatar-badge">
+                        <i class="fa-solid fa-graduation-cap"></i> 安溪國中
+                    </div>
+                </div>
+
+                <div class="hero-content">
+                    <h2><i class="fa-solid fa-wand-magic-sparkles"></i> Hello World! 我是</h2>
+                    <h1><span>鄭文崎</span> 🐾</h1>
+                    
+                    <div class="hero-tags">
+                        <span class="tag"><i class="fa-solid fa-school"></i> 安溪國中學子</span>
+                        <span class="tag tag-blue"><i class="fa-solid fa-laptop-code"></i> 智光商工體驗中</span>
+                        <span class="tag tag-mint"><i class="fa-solid fa-bullseye"></i> 跨領域數位人才</span>
+                    </div>
+
+                    <div class="hero-bio">
+                        💖 歡迎來到我的個人網站！我對<b>商業經營</b>、<b>電子商務</b>與<b>智慧科技</b>充滿熱情！在智光商工的課程中，我努力鍛鍊<b>打字指法</b>與<b>網頁開發</b>，期望未來成為全方位的數位商管大師！✨
+                    </div>
+
+                    <div class="hero-btns">
+                        <a href="#typing" class="btn btn-primary">
+                            <i class="fa-solid fa-gamepad"></i> 玩打字指法遊戲
+                        </a>
+                        <a href="#interests" class="btn btn-secondary">
+                            <i class="fa-solid fa-compass"></i> 探索我的專長
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About & Core Values Section -->
+        <section id="about" class="section-padding">
+            <div class="section-header">
+                <div class="section-badge"><i class="fa-solid fa-seedling"></i> ABOUT ME</div>
+                <h2 class="section-title">關於我的 <span>學習歷程</span> 🎒</h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="cute-card">
+                    <div class="card-icon icon-pink">
+                        <i class="fa-solid fa-school-flag"></i>
+                    </div>
+                    <h3>現就讀：安溪國中</h3>
+                    <p>在國中階段培養豐富的好奇心與踏實的學術基礎，積極參加各項多元體驗課程，充實自我！</p>
+                </div>
+
+                <div class="cute-card">
+                    <div class="card-icon icon-blue">
+                        <i class="fa-solid fa-keyboard"></i>
+                    </div>
+                    <h3>智光商工 技能培育</h3>
+                    <p>於智光商工課程中努力學習標準打字指法與專業網頁開發，一步一腳印紮實奠定資訊硬實力！</p>
+                </div>
+
+                <div class="cute-card">
+                    <div class="card-icon icon-yellow">
+                        <i class="fa-solid fa-lightbulb"></i>
+                    </div>
+                    <h3>數位商管 跨領域目標</h3>
+                    <p>結合商業思維、電商趨勢與前瞻智慧科技，打造全方位的數位整合思考能力！</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interests Section -->
+        <section id="interests" class="section-padding">
+            <div class="section-header">
+                <div class="section-badge"><i class="fa-solid fa-heart"></i> INTERESTS & SKILLS</div>
+                <h2 class="section-title">四大核心 <span>熱情與領域</span> 🌟</h2>
+            </div>
+
+            <div class="interests-grid">
+                <div class="interest-card" onclick="openModal('商業經營', '🏢 商業經營 Business Management', '學習企業營運架構、資源分配與商業創新模式！希望未來能創立或經營具有影響力的數位品牌！')">
+                    <div class="interest-emoji">🏢</div>
+                    <h4>商業經營</h4>
+                    <p>探索企業營運模式、團隊領導與商業策略決策！</p>
+                    <span class="interest-tag">經典商管 💼</span>
+                </div>
+
+                <div class="interest-card" onclick="openModal('電子商務', '🛒 電子商務 E-Commerce', '掌握線上購物趨勢、數位行銷、平台營運與社群電商！讓產品精準觸及全球客戶！')">
+                    <div class="interest-emoji">🛒</div>
+                    <h4>電子商務</h4>
+                    <p>掌握線上行銷、電商平台操作與數位品牌運作！</p>
+                    <span class="interest-tag">網路商機 🚀</span>
+                </div>
+
+                <div class="interest-card" onclick="openModal('智慧科技', '🤖 智慧科技 Smart Tech', '研究AI人工智慧、物聯網與自動化科技，將科技應用於改善日常生活與商業效率！')">
+                    <div class="interest-emoji">🤖</div>
+                    <h4>智慧科技</h4>
+                    <p>了解 AI 應用、智慧生活趨勢與最新科技趨勢！</p>
+                    <span class="interest-tag">未來趨勢 ⚡</span>
+                </div>
+
+                <div class="interest-card" onclick="openModal('網頁開發', '💻 網頁開發 Web Development', '學習 HTML、CSS、JavaScript 前端語法，打造超級可愛且流暢的互動網頁體驗！')">
+                    <div class="interest-emoji">💻</div>
+                    <h4>網頁開發</h4>
+                    <p>練習打字指法、HTML/CSS 網頁設計與前端互動實作！</p>
+                    <span class="interest-tag">實作開發 🎨</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Typing Mini Game Section -->
+        <section id="typing" class="section-padding">
+            <div class="section-header">
+                <div class="section-badge"><i class="fa-solid fa-gamepad"></i> MINI GAME</div>
+                <h2 class="section-title">文崎的 <span>打字指法大考驗</span> ⌨️</h2>
+            </div>
+
+            <div class="typing-section">
+                <div class="typing-header">
+                    <div>
+                        <h3 style="font-weight: 800; font-size: 1.3rem;">🎯 智光商工指法挑戰賽</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">試著在下方輸入框打出相同的文字，測測你的速度吧！</p>
+                    </div>
+                    <div class="typing-stats">
+                        <div class="stat-box" id="timerBox"><i class="fa-solid fa-clock"></i> 時間: 0s</div>
+                        <div class="stat-box" id="wpmBox"><i class="fa-solid fa-bolt"></i> 完成度: 0%</div>
+                    </div>
+                </div>
+
+                <div class="typing-target-box" id="typingTarget">
+                    我是鄭文崎，期許自己未來能成為全方位的數位商管跨領域人才！
+                </div>
+
+                <input type="text" class="typing-input" id="typingInput" placeholder="👉 在這裡開始輸入文字..." autocomplete="off">
+            </div>
+        </section>
+
+        <!-- Future Vision Section -->
+        <section id="vision" class="section-padding">
+            <div class="vision-box">
+                <h3>🌟 我的未來雄心與期許</h3>
+                <p>「期許自己未來能成為全方位的數位商管跨領域人才！」<br>兼具商業敏銳度與資訊科技實力，開創無限可能的未來！</p>
+                
+                <div class="vision-steps">
+                    <div class="v-step">
+                        <div class="v-step-num">01</div>
+                        <h4>階段一：紮實打底</h4>
+                        <p>在安溪國中專注學業，並於智光商工課程精進打字與程式技能。</p>
+                    </div>
+
+                    <div class="v-step">
+                        <div class="v-step-num">02</div>
+                        <h4>階段二：跨域融合</h4>
+                        <p>深入學習電子商務、數據分析與智慧科技，將理論轉化為實作能力。</p>
+                    </div>
+
+                    <div class="v-step">
+                        <div class="v-step-num">03</div>
+                        <h4>階段三：綻放光彩</h4>
+                        <p>成為能夠引領數位轉型、具備國際視野的全方位數位商管領航者！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cute Guestbook Section -->
+        <section id="guestbook" class="section-padding">
+            <div class="section-header">
+                <div class="section-badge"><i class="fa-solid fa-heart-pulse"></i> GUESTBOOK</div>
+                <h2 class="section-title">給文崎的 <span>加油留言牆</span> 💌</h2>
+            </div>
+
+            <div class="guestbook-form">
+                <div class="form-row">
+                    <input type="text" class="form-control" id="noteAuthor" placeholder="🌸 你的暱稱/名字" maxlength="15">
+                    <select class="form-control" id="noteColor">
+                        <option value="note-pink">💖 粉紅甜心貼紙</option>
+                        <option value="note-yellow">⭐ 陽光金黃貼紙</option>
+                        <option value="note-blue">💙 天空蔚藍貼紙</option>
+                        <option value="note-mint">💚 薄荷清新貼紙</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <textarea class="form-control" id="noteText" placeholder="✍️ 寫下你想給文崎鼓勵的話吧..." maxlength="100"></textarea>
+                </div>
+                <button class="btn btn-primary" onclick="addStickyNote()" style="width: 100%; justify-content: center;">
+                    <i class="fa-solid fa-paper-plane"></i> 送出可愛貼紙
+                </button>
+            </div>
+
+            <div class="notes-grid" id="notesGrid">
+                <!-- Preset Cute Notes -->
+                <div class="sticky-note note-pink">
+                    <div class="note-header">
+                        <span>🐾 智光商工同學</span>
+                        <span class="note-time">剛才</span>
+                    </div>
+                    <div>加油！文崎的打字指法越來越快了，一起成為網頁高手！✨</div>
+                </div>
+
+                <div class="sticky-note note-yellow">
+                    <div class="note-header">
+                        <span>🎒 安溪國中好友</span>
+                        <span class="note-time">今天</span>
+                    </div>
+                    <div>網站超級可愛！未來的全方位數位商管人才非你莫屬啦！🚀</div>
+                </div>
+
+                <div class="sticky-note note-mint">
+                    <div class="note-header">
+                        <span>🤖 智慧科技愛好者</span>
+                        <span class="note-time">昨日</span>
+                    </div>
+                    <div>很棒的目標！將商業經營與科技結合非常有前瞻性！💪</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Interactive Detail Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-card">
+            <button class="btn-close-modal" onclick="closeModal()">✕</button>
+            <div id="modalIcon" style="font-size: 4rem; margin-bottom: 10px;">🌟</div>
+            <h3 id="modalTitle" style="font-size: 1.8rem; font-weight: 800; margin-bottom: 15px; color: var(--primary);">標題</h3>
+            <p id="modalBody" style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 25px;">內容...</p>
+            <button class="btn btn-primary" onclick="closeModal()">了解啦！💖</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>Made with <i class="fa-solid fa-heart"></i> by <b>鄭文崎 Zheng Wen-Qi</b> © 2026</p>
+            <p style="font-size: 0.85rem; margin-top: 5px; opacity: 0.7;">安溪國中 ‧ 智光商工體驗課程 ‧ 全方位數位商管跨領域人才</p>
+        </div>
+    </footer>
+
+    <!-- Audio & Interactive Scripts -->
+    <script>
+        // Web Audio API Synthesizer for Cute Pop Sound Effects
+        let soundEnabled = true;
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        let audioCtx = null;
+
+        function playPopSound(freq = 600, type = 'sine') {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new AudioContext();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(freq * 1.5, audioCtx.currentTime + 0.08);
+                
+                gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
+                
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.08);
+            } catch(e){}
+        }
+
+        // Sound toggle button
+        document.getElementById('btnSoundToggle').addEventListener('click', () => {
+            soundEnabled = !soundEnabled;
+            const btn = document.getElementById('btnSoundToggle');
+            if (soundEnabled) {
+                btn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+                playPopSound(800);
+            } else {
+                btn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+            }
+        });
+
+        // Add sound to all buttons and links
+        document.querySelectorAll('.btn, .nav-links a, .interest-card, .tag').forEach(el => {
+            el.addEventListener('mouseenter', () => playPopSound(450));
+            el.addEventListener('click', () => playPopSound(700));
+        });
+
+        // Avatar Interactive Dialogue & Confetti
+        const phrases = [
+            "✨ 我是鄭文崎，一起加油！",
+            "🎒 安溪國中學習成長中！",
+            "⌨️ 智光商工打字指法努力修練中！",
+            "🚀 期許成為全方位數位商管人才！",
+            "💖 謝謝你來逛我的可愛網站！"
+        ];
+        let phraseIdx = 0;
+
+        const avatarWrapper = document.getElementById('avatarWrapper');
+        const speechBubble = document.getElementById('speechBubble');
+
+        avatarWrapper.addEventListener('click', () => {
+            playPopSound(900);
+            phraseIdx = (phraseIdx + 1) % phrases.length;
+            speechBubble.innerText = phrases[phraseIdx];
+            avatarWrapper.classList.add('active');
+            
+            // Trigger cute confetti
+            confetti({
+                particleCount: 30,
+                spread: 60,
+                origin: { y: 0.6 }
+            });
+
+            setTimeout(() => avatarWrapper.classList.remove('active'), 2500);
+        });
+
+        // Modal Functions
+        function openModal(type, title, body) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = body;
+            document.getElementById('modalOverlay').classList.add('active');
+            playPopSound(650);
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').classList.remove('active');
+            playPopSound(400);
+        }
+
+        // Typing Mini Game Logic
+        const targetText = "我是鄭文崎，期許自己未來能成為全方位的數位商管跨領域人才！";
+        const typingInput = document.getElementById('typingInput');
+        const typingTarget = document.getElementById('typingTarget');
+        const timerBox = document.getElementById('timerBox');
+        const wpmBox = document.getElementById('wpmBox');
+
+        let timerStarted = false;
+        let startTime = 0;
+        let timerInterval = null;
+
+        typingInput.addEventListener('input', () => {
+            const val = typingInput.value;
+            
+            if (!timerStarted && val.length > 0) {
+                timerStarted = true;
+                startTime = Date.now();
+                timerInterval = setInterval(() => {
+                    const elapsed = Math.floor((Date.now() - startTime) / 1000);
+                    timerBox.innerHTML = `<i class="fa-solid fa-clock"></i> 時間: ${elapsed}s`;
+                }, 1000);
+            }
+
+            // Render highlighted target text
+            let html = '';
+            let correctCount = 0;
+            for (let i = 0; i < targetText.length; i++) {
+                if (i < val.length) {
+                    if (val[i] === targetText[i]) {
+                        html += `<span class="char-correct">${targetText[i]}</span>`;
+                        correctCount++;
+                    } else {
+                        html += `<span class="char-wrong">${targetText[i]}</span>`;
+                    }
+                } else if (i === val.length) {
+                    html += `<span class="char-current">${targetText[i]}</span>`;
+                } else {
+                    html += targetText[i];
+                }
+            }
+            typingTarget.innerHTML = html;
+
+            const progress = Math.min(100, Math.floor((correctCount / targetText.length) * 100));
+            wpmBox.innerHTML = `<i class="fa-solid fa-bolt"></i> 完成度: ${progress}%`;
+
+            // Victory check
+            if (val === targetText) {
+                clearInterval(timerInterval);
+                playPopSound(1000);
+                confetti({
+                    particleCount: 100,
+                    spread: 80,
+                    origin: { y: 0.5 }
+                });
+                setTimeout(() => {
+                    alert("🎉 太厲害了！完美完成指法打字挑戰！加油，邁向數位商管大師！");
+                }, 300);
+            }
+        });
+
+        // Sticky Notes / Guestbook Logic
+        function addStickyNote() {
+            const author = document.getElementById('noteAuthor').value.trim() || '匿名的好朋友';
+            const text = document.getElementById('noteText').value.trim();
+            const colorClass = document.getElementById('noteColor').value;
+
+            if (!text) {
+                alert('請填寫留言內容唷！🌸');
+                return;
+            }
+
+            const grid = document.getElementById('notesGrid');
+            const noteDiv = document.createElement('div');
+            noteDiv.className = `sticky-note ${colorClass}`;
+            noteDiv.innerHTML = `
+                <div class="note-header">
+                    <span>🌸 ${escapeHtml(author)}</span>
+                    <span class="note-time">剛剛</span>
+                </div>
+                <div>${escapeHtml(text)}</div>
+            `;
+            
+            grid.prepend(noteDiv);
+            document.getElementById('noteText').value = '';
+            playPopSound(850);
+
+            confetti({
+                particleCount: 40,
+                spread: 50,
+                origin: { y: 0.8 }
+            });
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+            });
+        }
+
+        // Floating Canvas Particles (Sparkles, Hearts & Stars)
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 14 + 10;
+                this.speedY = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.8;
+                this.opacity = Math.random() * 0.5 + 0.3;
+                this.symbol = ['✨', '🌸', '💖', '⭐', '☁️', '🎈'][Math.floor(Math.random() * 6)];
+            }
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                if (this.y < -50) this.reset();
+            }
+            draw() {
+                ctx.globalAlpha = this.opacity;
+                ctx.font = `${this.size}px sans-serif`;
+                ctx.fillText(this.symbol, this.x, this.y);
+            }
+        }
+
+        for (let i = 0; i < 25; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+    </script>
+</body>
+</html>
